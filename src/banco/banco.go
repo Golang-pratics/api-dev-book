@@ -3,6 +3,8 @@ package banco
 import (
 	"api/src/config"
 	"database/sql"
+	"log"
+
 	_ "github.com/lib/pq"
 )
 
@@ -17,6 +19,7 @@ func Conectar() (*sql.DB, error){
 		db.Close()
 		return nil, erro
 	}
+	log.Printf("Banco Conectado")
 
 	return db, nil
 
