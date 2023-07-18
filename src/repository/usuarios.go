@@ -28,7 +28,8 @@ func (repositorio usuarios) Criar(usuario model.Usuario) (uint64, error) {
 	return uint64(idInserido), nil
 
 }
-//busca todos os usuários que atendem pelo filto de nome ou nick
+
+// busca todos os usuários que atendem pelo filto de nome ou nick
 func (repositorio usuarios) BuscaPorNomeOuNick(nomeOuNick string) ([]model.Usuario, error) {
 	nomeOuNick = fmt.Sprintf("%%%s%%", nomeOuNick) //%nomeounick%
 
@@ -43,7 +44,7 @@ func (repositorio usuarios) BuscaPorNomeOuNick(nomeOuNick string) ([]model.Usuar
 	defer linhas.Close()
 
 	var usuarios []model.Usuario
-	for linhas.Next(){
+	for linhas.Next() {
 		var usuario model.Usuario
 		if erro = linhas.Scan(
 			&usuario.ID,
@@ -51,7 +52,7 @@ func (repositorio usuarios) BuscaPorNomeOuNick(nomeOuNick string) ([]model.Usuar
 			&usuario.Nick,
 			&usuario.Email,
 			&usuario.CriadoEm,
-		); erro != nil{
+		); erro != nil {
 			return nil, erro
 		}
 
@@ -75,7 +76,7 @@ func (repositorio usuarios) BuscarPorID(ID uint64) (model.Usuario, error) {
 	defer linhas.Close()
 
 	var usuario model.Usuario
-	if linhas.Next(){
+	if linhas.Next() {
 		if erro = linhas.Scan(
 			&usuario.ID,
 			&usuario.Nome,
@@ -89,4 +90,33 @@ func (repositorio usuarios) BuscarPorID(ID uint64) (model.Usuario, error) {
 
 	return usuario, nil
 
+}
+
+func (repositorio usuarios) AtualizarUsuario(ID uint64, usuario model.Usuario) error {
+	statement, erro := repositorio.db.Prepare("UPDATE usuarios SET nome = $1, nick = $2, email = $3 WHERE id = $4")
+	if erro != nil {
+		return erro
+	}
+	defer statement.Close()
+
+	if _, erro = statement.Exec(usuario.Nome, usuario.Nick, usuario.Email, ID); erro != nil {
+		return erro
+	}
+
+	return nil
+
+}
+
+func (repositorio usuarios)Deletar(ID uint64) error{
+	statement, erro := repositorio.db.Prepare("delete from usuarios where id = $1")
+	if erro != nil {
+		return erro
+	}
+	defer statement.Close()
+
+	if _,erro = statement.Exec(ID); erro != nil {
+		return erro
+	}
+
+	return nil
 }
