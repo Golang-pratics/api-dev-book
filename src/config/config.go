@@ -11,8 +11,13 @@ import (
 
 
 var(
+	//StringConexaoBanco é a string de conexão com o banco de dados
 	StringConexaoBanco = ""
+	//porta onde a api está rodando
 	Porta = 0
+	// chave usada para assinar o token
+	SecretKey []byte
+	
 )
 // carregar vai inicializar as variaves de ambiente
 func Carregar(){
@@ -34,6 +39,8 @@ func Carregar(){
 		os.Getenv("DB_SENHA"),
 		os.Getenv("DB_NOME"),
 	)
+
+	SecretKey = []byte(os.Getenv("SECRET_KEY"))
 
 }
 
