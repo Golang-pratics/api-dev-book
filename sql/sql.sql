@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS devbook;
 USE devbook;
 
+DROP TABLE IF EXISTS publicacoes;
+DROP TABLE IF EXISTS seguidores;
 DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE usuarios(
@@ -22,4 +24,14 @@ CREATE TABLE seguidores (
     foreign key (usuario_id) references usuarios(id) on delete cascade,
     foreign key (seguidor_id) references usuarios(id) on delete cascade,
     primary key (usuario_id, seguidor_id)
+);
+
+CREATE TABLE publicacoes (
+    id serial primary key,
+    autor_id integer not null,
+    titulo varchar(255) not null,
+    conteudo varchar(300) not null,
+    criadoEm timestamp default current_timestamp,
+    curtidas integer default 0,
+    foreign key (usuario_id) references usuarios(id) on delete cascade
 );
