@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  devbook:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports: 
+        - "5000:5000"
+      environment:
+        DB_HOST: 172.18.0.1
+        DB_USUARIO: postgres
+        DB_SENHA: postgres
+        DB_NOME: devbook 
+        DB_PORT: 5432
+        API_PORTA: 5000
