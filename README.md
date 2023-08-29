@@ -1,6 +1,6 @@
 # api-dev-book
 
-ste projeto é baseado no curso da Udemy: "Aprenda Golang do Zero! Desenvolva uma APLICAÇÃO COMPLETA!" O projeto apresenta algumas diferenças em relação ao original, sendo a principal delas o banco de dados, que foi adaptado para utilizar o PostgreSQL, ao contrário do projeto original que utiliza o MySQL. Além disso, foram adicionados arquivos para possibilitar a criação e a execução via contêiner Docker. Observação: Apenas a parte do backend foi desenvolvida.
+Este projeto é baseado no curso da Udemy: "Aprenda Golang do Zero! Desenvolva uma APLICAÇÃO COMPLETA!" O projeto apresenta algumas diferenças em relação ao original, sendo a principal delas o banco de dados, que foi adaptado para utilizar o PostgreSQL, ao contrário do projeto original que utiliza o MySQL. Além disso, foram adicionados arquivos para possibilitar a criação e a execução via contêiner Docker. Observação: Apenas a parte do backend foi desenvolvida.
 
 ## Links do Projeto original
 
